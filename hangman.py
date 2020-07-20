@@ -10,30 +10,30 @@ survived_msg = 'You survived!'
 hanged_msg = 'You are hanged!'
 
 guess = '-'*len(word)
+guessed_letters = []
 
 tries = 8
 while tries:
     print('\n' + guess)
     letter = input('Input a letter: ')
-    if letter not in word:
+    if len(letter) != 1:
+        print('You should input a single letter')
+    elif not letter.islower():
+        print('It is not an ASCII lowercase letter')
+    elif letter in guessed_letters:
+        print('You already typed this letter')
+    elif letter not in word:
         print('No such letter in the word')
-        tries -= 1
-    elif letter in guess:
-        print('No improvements')
+        guessed_letters.append(letter)
         tries -= 1
     else:
         for i in range(len(word)):
             if word[i] == letter:
                 guess = guess[:i] + letter + guess[i+1:]
+        guessed_letters.append(letter)
         if word == guess:
-            print(guess + '\n' + 'You guessed the word!')
+            print('You guessed the word ' + word + '!')
             print(survived_msg)
             break
-if tries == 0:
+else:
     print(hanged_msg)
-
-
-# if guess == word:
-#     print(survived_msg)
-# else:
-#     print(hanged_msg)
