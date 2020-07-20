@@ -1,3 +1,11 @@
 print('H A N G M A N')
-print('The game will be available soon.')
 
+survived_msg = 'You survived!'
+hanged_msg = 'You are hanged!'
+
+guess = input('Guess the word: ')
+
+if guess == 'python':
+    print(survived_msg)
+else:
+    print(hanged_msg)
